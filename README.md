@@ -122,5 +122,5 @@ The Pet Store microservice code and design documentation serve as the starting p
 
 - [Amazon Q CLI Documentation](https://aws.amazon.com/q/)
 - [Amazon EKS Documentation](https://aws.amazon.com/eks/)
-- [AWS MCP Server Documentation](https://aws.amazon.com/mcp/)
+- [AWS MCP Server Documentation](https://awslabs.github.io/mcp/)
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
