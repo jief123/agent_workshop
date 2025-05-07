@@ -15,3 +15,23 @@
 127.0.0.1 - - [30/Apr/2025 05:02:55] "GET /api/v1/pets/2 HTTP/1.1" 200 -
 127.0.0.1 - - [30/Apr/2025 05:02:55] "PUT /api/v1/pets/2 HTTP/1.1" 200 -
 127.0.0.1 - - [30/Apr/2025 05:02:55] "DELETE /api/v1/pets/2 HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/agent_workshop/petstore-app/src/controllers/health_controller.py', reloading
+ * Restarting with stat
+Traceback (most recent call last):
+  File "/home/ubuntu/agent_workshop/petstore-app/app.py", line 28, in <module>
+    app.run(host='0.0.0.0', port=8080, debug=True)
+  File "/home/ubuntu/agent_workshop/petstore-app/venv/lib/python3.12/site-packages/flask/app.py", line 1191, in run
+  File "/home/ubuntu/agent_workshop/petstore-app/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 1059, in run_simple
+  File "/home/ubuntu/agent_workshop/petstore-app/venv/lib/python3.12/site-packages/werkzeug/_reloader.py", line 444, in run_with_reloader
+  File "/home/ubuntu/agent_workshop/petstore-app/venv/lib/python3.12/site-packages/werkzeug/_reloader.py", line 266, in restart_with_reloader
+  File "/usr/lib/python3.12/subprocess.py", line 389, in call
+    with Popen(*popenargs, **kwargs) as p:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.12/subprocess.py", line 1840, in _execute_child
+    self._posix_spawn(args, executable, env, restore_signals,
+  File "/usr/lib/python3.12/subprocess.py", line 1784, in _posix_spawn
+    self.pid = os.posix_spawn(executable, args, env, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ubuntu/agent_workshop/petstore-app/venv/bin/python'

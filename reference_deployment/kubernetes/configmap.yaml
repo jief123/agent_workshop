@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: petstore
+data:
+  API_VERSION: v1
+  CORS_ORIGINS: https://petstore.example.com,http://localhost:3000
+  ENVIRONMENT: development
+  LOG_LEVEL: INFO
+  PAGINATION_LIMIT: "20"

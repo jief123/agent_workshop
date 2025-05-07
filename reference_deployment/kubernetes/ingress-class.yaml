@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: alb
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+    # Add Helm annotations to prevent the error
+    meta.helm.sh/release-name: "aws-load-balancer-controller"
+    meta.helm.sh/release-namespace: "kube-system"
+spec:
+  controller: ingress.k8s.aws/alb

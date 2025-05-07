@@ -1,0 +1,43 @@
+clusterName: ${CLUSTER_NAME}
+region: ${REGION}
+vpcId: ${VPC_ID}
+
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
+
+image:
+  repository: public.ecr.aws/eks/aws-load-balancer-controller
+  tag: v2.12.0
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+podSecurityContext:
+  fsGroup: 65534
+
+securityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+ingressClassConfig:
+  default: true
+
+ingressClass: alb
+
+enableCertManager: false
+
+createIngressClassResource: false
+
+enableShield: false
+enableWaf: false
+enableWafv2: false

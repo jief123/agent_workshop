@@ -1,202 +1,153 @@
-# Module 2: Transforming the Application for EKS
+# Module 2: Transforming and Deploying the Application to AWS EKS
 
 ## Overview
 
-In this module, you will use Amazon Q CLI to transform the Pet Store microservice into a containerized application ready for deployment on Amazon EKS. You'll learn how to craft effective prompts to generate a Dockerfile, Kubernetes manifests, and Terraform code for the infrastructure.
+This combined module guides you through transforming the Pet Store microservice into a containerized application and deploying it to Amazon EKS using Amazon Q CLI. You'll use the existing DEPLOYMENT_README.md as a reference for detailed configuration when creating deployment scripts.
 
 ## Learning Objectives
 
-By the end of this module, you will be able to:
-- Use Amazon Q CLI to analyze application requirements
-- Generate a Dockerfile for containerizing the application
-- Create Kubernetes manifests for deployment
-- Develop Terraform code for EKS infrastructure
-- Understand best practices for containerization and Kubernetes deployment
+- Transform the application for containerization and EKS deployment
+- Create Docker and Kubernetes configurations
+- Develop Terraform code for AWS infrastructure
+- Use AWS Cost Analysis MCP Server to optimize deployment costs
+- Generate deployment scripts based on detailed configuration documentation
+- Automatically generate testing scripts to verify deployment
 
 ## Prerequisites
 
 - Completed Module 1
 - Docker installed
-- Basic understanding of containers and Kubernetes
-- Basic understanding of Terraform and infrastructure as code
+- AWS account with appropriate permissions
+- AWS CLI, kubectl, and Terraform installed
+- Basic understanding of containers, Kubernetes, and infrastructure as code
 
-## Step 1: Analyze the Application Requirements
+## Part 1: Transforming the Application
 
-Before starting the transformation, use Amazon Q CLI to analyze the application requirements based on the design documentation.
+### Step 1: Review Deployment Documentation
 
-```bash
-q "Analyze the design documents in the design_docs directory and summarize the key requirements for containerization and deployment to EKS"
-```
-
-Review the output to understand what needs to be considered when containerizing the application and deploying it to EKS.
-
-## Step 2: Create a Dockerfile
-
-Use Amazon Q CLI to generate a Dockerfile for the Pet Store application based on the deployment requirements.
+First, review the existing DEPLOYMENT_README.md to understand the detailed configuration requirements:
 
 ```bash
-q "Based on the application requirements in design_docs/deployment_requirements.md, create a Dockerfile for the Pet Store application"
+q "Analyze the DEPLOYMENT_README.md in the workshop_modules directory and summarize the key configuration details for deployment scripts"
 ```
 
-1. Create a directory for the Docker artifacts:
+### Step 2: Create Dockerfile and Container Configuration
+
+Using the specifications from the deployment documentation:
 
 ```bash
 mkdir -p deployment/docker
+q "Based on the Docker configuration details in DEPLOYMENT_README.md, create a Dockerfile for the Pet Store application"
 ```
 
-2. Save the generated Dockerfile to `deployment/docker/Dockerfile`.
-
-3. Review the Dockerfile and understand:
-   - Base image selection
-   - Dependency installation
-   - Application code copying
-   - Configuration
-   - Security considerations
-   - Entrypoint definition
-
-If you need to refine the Dockerfile, you can ask Amazon Q CLI for specific improvements:
+Create an entrypoint script that follows the requirements in the documentation:
 
 ```bash
-q "How can I optimize this Dockerfile for security and performance?"
+q "Create a Docker entrypoint script according to the specifications in DEPLOYMENT_README.md"
 ```
 
-## Step 3: Create Kubernetes Manifests
+### Step 3: Create Kubernetes Manifests
 
-Use Amazon Q CLI to generate Kubernetes manifests for deploying the Pet Store application to EKS.
-
-```bash
-q "Create Kubernetes deployment and service manifests for the Pet Store application based on the architecture described in design_docs/architecture.md and the requirements in design_docs/deployment_requirements.md"
-```
-
-1. Create a directory for Kubernetes manifests:
+Generate Kubernetes manifests based on the detailed configuration in the documentation:
 
 ```bash
 mkdir -p deployment/kubernetes
+q "Create Kubernetes manifests for the Pet Store application based on the Kubernetes Resources section in DEPLOYMENT_README.md"
 ```
 
-2. Save the generated manifests to appropriate files in the `deployment/kubernetes` directory.
+### Step 4: Develop Terraform Infrastructure Code
 
-3. Generate additional Kubernetes resources:
-
-```bash
-q "Create a Kubernetes ConfigMap and Secret manifest for the Pet Store application based on the requirements in design_docs/deployment_requirements.md"
-```
-
-```bash
-q "Create a Kubernetes Ingress manifest for the Pet Store application to expose it externally"
-```
-
-```bash
-q "Create a Kubernetes HorizontalPodAutoscaler manifest for the Pet Store application based on the scaling requirements in design_docs/deployment_requirements.md"
-```
-
-4. Review each manifest and understand:
-   - Resource requests and limits
-   - Replica configuration
-   - Health checks
-   - Environment variables
-   - Service configuration
-   - Ingress rules
-   - Scaling parameters
-
-If you need to refine any manifest, you can ask Amazon Q CLI for specific improvements:
-
-```bash
-q "How can I improve the security of my Kubernetes deployment manifest?"
-```
-
-## Step 4: Develop Terraform Code for EKS Infrastructure
-
-Use Amazon Q CLI to generate Terraform code for provisioning an EKS cluster and the necessary infrastructure.
-
-```bash
-q "Generate Terraform code to provision an EKS cluster that meets the requirements in design_docs/deployment_requirements.md"
-```
-
-1. Create a directory for Terraform code:
+Create Terraform code that matches the infrastructure specifications:
 
 ```bash
 mkdir -p deployment/terraform
+q "Generate Terraform code for the EKS cluster and related resources based on the Terraform Resources section in DEPLOYMENT_README.md"
 ```
 
-2. Save the generated Terraform code to appropriate files in the `deployment/terraform` directory.
+## Part 2: Deploying to AWS
 
-3. Generate additional Terraform resources:
+### Step 5: Set Up AWS Cost Analysis MCP Server
+
+The AWS Cost Analysis MCP Server enhances Amazon Q's capabilities by providing cost optimization insights for your AWS deployments.
+
+1. Install the AWS Cost Analysis MCP Server:
 
 ```bash
-q "Create Terraform code for the VPC and networking components required for the EKS cluster"
+q "How do I install and set up the AWS Cost Analysis MCP Server from https://awslabs.github.io/mcp/servers/cost-analysis-mcp-server/"
 ```
+
+2. Analyze your Terraform project for cost optimization:
 
 ```bash
-q "Create Terraform code for the security groups and IAM roles needed for the EKS cluster"
+q "Using the Cost Analysis MCP Server's analyze_terraform_project tool, analyze the Terraform code in deployment/terraform to identify AWS services used and potential cost optimizations"
 ```
+
+The `analyze_terraform_project` tool is defined with:
+```python
+@mcp.tool(
+    name='analyze_terraform_project',
+    description='Analyze a Terraform project to identify AWS services used. This tool dynamically extracts service information from Terraform resource declarations.'
+)
+```
+
+3. Review the cost analysis and implement recommended optimizations:
 
 ```bash
-q "Create Terraform code for an AWS RDS PostgreSQL instance that can be used by the Pet Store application"
+q "Based on the Cost Analysis MCP Server's output, what changes should I make to optimize costs in my EKS deployment?"
 ```
 
-4. Review the Terraform code and understand:
-   - VPC and networking configuration
-   - EKS cluster configuration
-   - Node group setup
-   - Security groups and IAM roles
-   - Resource tagging
+### Step 6: Generate Deployment and Testing Scripts
 
-If you need to refine the Terraform code, you can ask Amazon Q CLI for specific improvements:
-
-```bash
-q "How can I optimize my Terraform code for cost and security?"
-```
-
-## Step 5: Create Deployment Scripts
-
-Use Amazon Q CLI to generate deployment scripts that will help with building and deploying the application.
-
-```bash
-q "Create a bash script that builds the Docker image, pushes it to Amazon ECR, and updates the Kubernetes manifests with the new image tag"
-```
-
-1. Create a directory for scripts:
+Create comprehensive deployment scripts based on the deployment process described in the documentation:
 
 ```bash
 mkdir -p deployment/scripts
+q "Create a deploy.sh script that follows the Deployment Process section in DEPLOYMENT_README.md"
 ```
-
-2. Save the generated script to `deployment/scripts/build.sh`.
 
 ```bash
-q "Create a bash script that applies the Terraform code and Kubernetes manifests to deploy the application to EKS"
+q "Create a cleanup.sh script that follows the Cleanup Process section in DEPLOYMENT_README.md"
 ```
 
-3. Save the generated script to `deployment/scripts/deploy.sh`.
+### Step 7: Deploy the Application
 
-4. Make the scripts executable:
+Deploy the application using the generated scripts:
 
 ```bash
-chmod +x deployment/scripts/build.sh
-chmod +x deployment/scripts/deploy.sh
+cd deployment/scripts
+./deploy.sh
 ```
 
-## Step 6: Review and Validate the Transformation
+## Part 3: Automated Testing
 
-Review all the artifacts created in this module:
-- Dockerfile
-- Kubernetes manifests
-- Terraform code
-- Deployment scripts
+### Step 8: Generate Automated Testing Scripts
 
-Use Amazon Q CLI to validate the transformation:
+Have Amazon Q automatically generate testing scripts based on the documentation:
 
 ```bash
-q "Review the Dockerfile, Kubernetes manifests, and Terraform code we've created. Are there any issues or improvements that should be made?"
+mkdir -p deployment/tests
+q "Based on the DEPLOYMENT_README.md, create a comprehensive test script that verifies all aspects of the deployment including infrastructure, Kubernetes resources, and application functionality"
 ```
 
-Make any suggested improvements to the artifacts.
+The test script should include:
+- Infrastructure validation tests
+- Kubernetes resource validation tests
+- Application health checks
+- API endpoint tests
+- Security validation tests
+- Performance baseline tests
+
+Run the automated tests to verify the deployment:
+
+```bash
+cd deployment/tests
+./run_tests.sh
+```
 
 ## Conclusion
 
-In this module, you've used Amazon Q CLI to transform the Pet Store microservice into a containerized application ready for deployment on Amazon EKS. You've created a Dockerfile, Kubernetes manifests, and Terraform code for the infrastructure.
+You've successfully transformed the Pet Store application for containerized deployment and deployed it to AWS EKS using Amazon Q CLI and the AWS Cost Analysis MCP Server. By leveraging the detailed configuration in the DEPLOYMENT_README.md and focusing on cost optimization, you've created scripts that follow best practices for deployment, security, and cost efficiency. The automated testing ensures that your deployment meets all requirements specified in the documentation.
 
 ## Next Steps
 
-Proceed to Module 3, where you'll use Amazon Q CLI with AWS MCP Server to deploy the application to AWS.
+Explore advanced topics including sophisticated CI/CD pipelines, comprehensive monitoring, auto-scaling, disaster recovery, and additional security best practices.

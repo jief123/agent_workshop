@@ -102,6 +102,10 @@ agent_workshop/
 ### Module 2: Transforming the Application for EKS
 - Using Amazon Q CLI to analyze design documents
 - Learning to craft effective prompts for infrastructure tasks
+- Database refactoring:
+  - Refactoring the application to support PostgreSQL for production
+  - Creating database migration scripts
+  - Enhancing health checks for database connectivity
 - Containerization with Docker:
   - Creating an optimized Dockerfile using Amazon Q CLI
   - Building and testing the container locally
@@ -112,6 +116,7 @@ agent_workshop/
 - Infrastructure as Code with Terraform:
   - VPC and networking setup using Amazon Q CLI
   - EKS cluster configuration using Amazon Q CLI
+  - RDS PostgreSQL instance setup using Amazon Q CLI
   - Security and IAM configuration using Amazon Q CLI
   - Resource optimization using Amazon Q CLI
 
@@ -140,27 +145,33 @@ agent_workshop/
 q "Analyze the design documents in the design_docs directory and summarize the key requirements for containerization and deployment"
 ```
 
+### For Database Refactoring
+```
+q "Analyze the database connection code in the Pet Store application and refactor it to support both SQLite for development and PostgreSQL for production"
+```
+
+q "Create a Python script to migrate data from SQLite to PostgreSQL for the Pet Store application"
+```
+
 ### For Dockerfile Creation
 ```
-q "Based on the application requirements in design_docs/deployment_requirements.md, create a Dockerfile for the Pet Store application"
+q "Based on the application requirements in design_docs/deployment_requirements.md, create a Dockerfile for the Pet Store application that includes PostgreSQL support"
 ```
 
 ### For Kubernetes Manifest Generation
 ```
-q "Create Kubernetes deployment and service manifests for the Pet Store application based on the architecture described in design_docs/architecture.md"
+q "Create Kubernetes deployment and service manifests for the Pet Store application based on the architecture described in design_docs/architecture.md and the requirements in design_docs/deployment_requirements.md"
 ```
 
 ### For Terraform Development
 ```
-q "Generate Terraform code to provision an EKS cluster that meets the requirements in design_docs/deployment_requirements.md"
+q "Generate Terraform code to provision an EKS cluster and RDS PostgreSQL instance that meets the requirements in design_docs/deployment_requirements.md"
 ```
 
 ### For Deployment Assistance
 ```
 q "Help me deploy the application to EKS using the Terraform code and Kubernetes manifests we've created"
 ```
-
-## Testing and Validation
 
 - Test the Pet Store application to ensure it runs locally
 - Validate that the design documentation provides sufficient context for Amazon Q CLI

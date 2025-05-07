@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: petstore-ingress
+  namespace: petstore
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /api/v1/health
+    alb.ingress.kubernetes.io/subnets: subnet-07fbf98e3f0e345f4,subnet-0a3b63b0b596af14e,subnet-051876155b439b555
+spec:
+  ingressClassName: alb
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: petstore
+            port:
+              number: 80
