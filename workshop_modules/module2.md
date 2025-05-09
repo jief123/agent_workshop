@@ -20,6 +20,7 @@ This combined module guides you through transforming the Pet Store microservice 
 - AWS account with appropriate permissions
 - AWS CLI, kubectl, and Terraform installed
 - Basic understanding of containers, Kubernetes, and infrastructure as code
+- Everything you create should be under project folder/development/
 
 ## Part 1: Transforming the Application
 
