@@ -1,4 +1,4 @@
-# 使用 Amazon Q CLI 加速 IT 运维工作坊
+# 工作坊：通过Agent技术加速 IT 运维
 
 本工作坊展示了如何通过两种互补的方法利用 AI 代理来执行 IT 运维任务：使用现有代理提高个人生产力，以及构建自定义代理来自动化特定任务。您将学习如何使用 Amazon Q CLI 进行基础设施任务，以及如何使用 Rapid Assistant SDK 创建自己的代理。
 
@@ -82,9 +82,10 @@
 - 开发 EKS 基础设施的 Terraform 代码
 - 审查和优化生成的代码
 
-### 模块 3：使用 MCP 和 Rapid Assistant 构建宠物商店代理
+### 模块 3：使用 MCP 和提示驱动开发构建宠物商店代理
 - 了解模型上下文协议（MCP）及其如何扩展 LLM 功能
 - 学习如何使用 Rapid Assistant SDK 构建自定义代理
+- 应用提示驱动开发来设计和实现代理工具
 - 将宠物商店 API 打包为 MCP 服务器
 - 创建与宠物商店 API 交互的自定义工具
 - 配置 Amazon Q CLI 使用您的自定义 MCP 服务器
@@ -121,8 +122,10 @@
    q "生成 Terraform 代码，以配置满足 design_docs/deployment_requirements.md 中要求的 EKS 集群"
    ```
 
-5. 构建宠物商店 MCP 代理：
+5. 使用提示驱动开发构建宠物商店 MCP 代理：
    ```
+   q "使用 Rapid Assistant SDK 设计一个用于列出商店中宠物的工具定义"
+   q "如何改进 search_pets 工具以更好地处理大小写敏感性和部分匹配？"
    q "帮我使用 Rapid Assistant SDK 创建一个 MCP 服务器，该服务器将宠物商店 API 操作作为工具暴露"
    ```
 

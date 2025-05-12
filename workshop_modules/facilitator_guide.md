@@ -7,22 +7,21 @@ This guide provides instructions and tips for facilitators running the "IT Ops A
 This workshop demonstrates how to use Amazon Q CLI and other AI agents to accelerate IT operations tasks. Participants will:
 1. Understand a Pet Store microservice application
 2. Transform it for deployment on AWS EKS using Amazon Q CLI
-3. Build a custom Pet Store agent using MCP and Rapid Assistant SDK
+3. Build a custom Pet Store agent using MCP and Rapid Assistant SDK with prompt-driven development
 4. Work in groups to develop their own agents for real-world use cases
 
 ## Workshop Timeline (Full Day)
 
 | Time | Activity |
 |------|----------|
-| 9:00 - 9:30 | Welcome and Introduction |
-| 9:30 - 10:30 | Module 1: Understanding the Pet Store Microservice |
+| 8:30 - 9:00 | Registration and Setup |
+| 9:00 - 10:30 | Module 1: Understanding the Pet Store Microservice with Amazon Q |
 | 10:30 - 10:45 | Break |
-| 10:45 - 12:15 | Module 2: Transforming the Application for EKS |
-| 12:15 - 13:15 | Lunch |
-| 13:15 - 14:45 | Module 3: Building a Pet Store Agent with MCP and Rapid Assistant |
-| 14:45 - 15:00 | Break |
-| 15:00 - 16:00 | Module 4: Build Your Own Agent - Development Time |
-| 16:00 - 16:45 | Module 4: Group Presentations |
+| 10:45 - 12:45 | Module 2: Transforming the Application for EKS with Amazon Q |
+| 12:45 - 13:30 | Lunch |
+| 13:30 - 15:00 | Module 3: Building a Pet Store Agent with MCP and Prompt-Driven Development |
+| 15:00 - 15:15 | Break |
+| 15:15 - 16:45 | Module 4: Build Your Own Agent - Development and Presentations |
 | 16:45 - 17:00 | Wrap-up and Q&A |
 
 ## Workshop Timeline (Half Day)
@@ -31,7 +30,7 @@ This workshop demonstrates how to use Amazon Q CLI and other AI agents to accele
 |------|----------|
 | 9:00 - 9:15 | Welcome and Introduction |
 | 9:15 - 10:00 | Module 1: Understanding the Pet Store Microservice |
-| 10:00 - 10:45 | Module 3: Building a Pet Store Agent with MCP and Rapid Assistant |
+| 10:00 - 10:45 | Module 3: Building a Pet Store Agent with MCP and Prompt-Driven Development |
 | 10:45 - 11:00 | Break |
 | 11:00 - 11:45 | Module 4: Build Your Own Agent - Development Time |
 | 11:45 - 12:30 | Module 4: Group Presentations |
@@ -116,15 +115,23 @@ This workshop demonstrates how to use Amazon Q CLI and other AI agents to accele
 - Participants have valid Kubernetes manifests
 - Participants have working Terraform code
 
-### Module 3: Building a Pet Store Agent with MCP and Rapid Assistant
+### Module 3: Building a Pet Store Agent with MCP and Prompt-Driven Development
 
 **Key Points to Cover:**
 - MCP concepts and benefits
 - Rapid Assistant SDK overview
-- Tool definition and implementation
+- Prompt-driven development methodology
+- Tool definition and implementation using prompts
 - MCP server setup and configuration
 - Amazon Q CLI integration with MCP
 - Advanced features and workflows
+
+**Prompt-Driven Development Pattern:**
+- Requirements analysis using prompts
+- Tool design through iterative prompting
+- Implementation guidance with Amazon Q
+- Testing and refinement with AI assistance
+- Integration with existing systems
 
 **Potential Issues and Solutions:**
 - **Issue**: MCP server fails to start
@@ -133,10 +140,13 @@ This workshop demonstrates how to use Amazon Q CLI and other AI agents to accele
   - **Solution**: Debug tool implementation, check input/output types
 - **Issue**: Amazon Q CLI can't connect to MCP server
   - **Solution**: Check network connectivity, verify server URL
+- **Issue**: Prompts don't generate effective tool designs
+  - **Solution**: Demonstrate prompt refinement techniques, provide example prompts
 
 **Checkpoints:**
+- Participants understand the prompt-driven development cycle
 - Participants have a running MCP server
-- Participants can define and implement tools
+- Participants can define and implement tools using prompts
 - Participants can use Amazon Q CLI with their MCP server
 
 ### Module 4: Build Your Own Agent - Customer Use Case Challenge
@@ -178,6 +188,14 @@ A: MCP is an open protocol specifically designed for extending LLM capabilities 
 
 **Q: Is Rapid Assistant production-ready?**
 A: Rapid Assistant is designed for building production-quality agents, but as with any technology, you should thoroughly test and secure your implementation before using it in production.
+
+### Prompt-Driven Development
+
+**Q: How does prompt-driven development differ from traditional development?**
+A: Prompt-driven development uses AI-generated code and designs through carefully crafted prompts, allowing for rapid iteration and exploration of solutions before committing to implementation.
+
+**Q: What makes a good prompt for agent development?**
+A: Good prompts are specific about the desired functionality, include context about the system, specify input/output requirements, and consider edge cases and error handling.
 
 ### Workshop Technical Issues
 

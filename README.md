@@ -82,9 +82,10 @@ These design documents are crucial for Amazon Q CLI to understand the applicatio
 - Develop Terraform code for EKS infrastructure
 - Review and refine the generated code
 
-### Module 3: Building a Pet Store Agent with MCP and Rapid Assistant
+### Module 3: Building a Pet Store Agent with MCP and Prompt-Driven Development
 - Understand the Model Context Protocol (MCP) and how it extends LLM capabilities
 - Learn how to use Rapid Assistant SDK to build custom agents
+- Apply prompt-driven development to design and implement agent tools
 - Package the Pet Store API as an MCP server
 - Create custom tools that interact with the Pet Store API
 - Configure Amazon Q CLI to use your custom MCP server
@@ -121,8 +122,10 @@ Throughout this workshop, you'll use Amazon Q CLI to assist with various tasks. 
    q "Generate Terraform code to provision an EKS cluster that meets the requirements in design_docs/deployment_requirements.md"
    ```
 
-5. Building a Pet Store MCP agent:
+5. Building a Pet Store MCP agent with prompt-driven development:
    ```
+   q "Design a tool definition for listing pets in a store using the Rapid Assistant SDK"
+   q "How can I improve the search_pets tool to handle case sensitivity and partial matches better?"
    q "Help me create an MCP server using Rapid Assistant SDK that exposes the Pet Store API operations as tools"
    ```
 
