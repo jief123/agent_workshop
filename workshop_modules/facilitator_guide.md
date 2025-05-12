@@ -24,17 +24,6 @@ This workshop demonstrates how to use Amazon Q CLI and other AI agents to accele
 | 15:15 - 16:45 | Module 4: Build Your Own Agent - Development and Presentations |
 | 16:45 - 17:00 | Wrap-up and Q&A |
 
-## Workshop Timeline (Half Day)
-
-| Time | Activity |
-|------|----------|
-| 9:00 - 9:15 | Welcome and Introduction |
-| 9:15 - 10:00 | Module 1: Understanding the Pet Store Microservice |
-| 10:00 - 10:45 | Module 3: Building a Pet Store Agent with MCP and Prompt-Driven Development |
-| 10:45 - 11:00 | Break |
-| 11:00 - 11:45 | Module 4: Build Your Own Agent - Development Time |
-| 11:45 - 12:30 | Module 4: Group Presentations |
-| 12:30 - 12:45 | Wrap-up and Q&A |
 
 ## Pre-workshop Setup
 
