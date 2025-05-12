@@ -120,16 +120,25 @@ agent_workshop/
   - Security and IAM configuration using Amazon Q CLI
   - Resource optimization using Amazon Q CLI
 
-### Module 3: Deploying to AWS with Q CLI + MCP Server
-- Understanding AWS MCP (Model Context Provider) Server
-- Using Amazon Q CLI with MCP Server for enhanced AWS assistance
-- Using Amazon Q CLI for:
-  - Pre-deployment validation
-  - Security scanning
-  - Resource optimization
-  - Deployment automation
-- Deployment verification and testing
-- Monitoring and observability setup
+### Module 3: Building a Pet Store Agent with MCP and Rapid Assistant
+- Introduction to MCP (Model Context Protocol)
+- Overview of Rapid Assistant SDK
+- Setting up the development environment
+- Creating a Pet Store API client
+- Defining MCP tools for Pet Store operations
+- Building the MCP server
+- Configuring Amazon Q CLI to use the custom MCP server
+- Advanced features and AWS service integration
+- Hands-on exercises
+
+### Module 4: Build Your Own Agent - Customer Use Case Challenge
+- Group formation (3-5 participants per group)
+- Use case identification and selection
+- Agent design (15 minutes)
+- Agent implementation (45 minutes)
+- Presentation preparation (10 minutes)
+- Group presentations (5 minutes per group + 2 minutes Q&A)
+- Evaluation and feedback
 
 ### Advanced Topics (Optional)
 - Implementing CI/CD pipelines
@@ -168,9 +177,17 @@ q "Create Kubernetes deployment and service manifests for the Pet Store applicat
 q "Generate Terraform code to provision an EKS cluster and RDS PostgreSQL instance that meets the requirements in design_docs/deployment_requirements.md"
 ```
 
-### For Deployment Assistance
+### For MCP Agent Development
 ```
-q "Help me deploy the application to EKS using the Terraform code and Kubernetes manifests we've created"
+q "Help me create an MCP server using Rapid Assistant SDK that exposes the Pet Store API operations as tools"
+```
+
+### For Custom Agent Use Cases
+```
+q "Design an MCP agent that could help with cloud cost optimization by analyzing AWS Cost Explorer data"
+```
+
+q "Create a tool definition for an MCP agent that can check the health of microservices"
 ```
 
 - Test the Pet Store application to ensure it runs locally
@@ -186,3 +203,7 @@ q "Help me deploy the application to EKS using the Terraform code and Kubernetes
 - Implementing API Gateway and Lambda for serverless components
 - Setting up monitoring with CloudWatch and Prometheus
 - Implementing automated backup and recovery procedures
+- Building specialized agents for different business domains
+- Creating agent networks that collaborate to solve complex problems
+- Implementing agent memory and context management
+- Developing agents that can learn from user interactions

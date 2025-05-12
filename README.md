@@ -1,13 +1,26 @@
 # IT Ops Acceleration with Amazon Q CLI Workshop
 
-This workshop demonstrates how to use Amazon Q CLI and other AI agents to accelerate IT operations tasks. You'll learn how to take a simple microservice application and deploy it to AWS EKS using AI assistance throughout the process.
+This workshop demonstrates how to leverage AI agents for IT operations tasks through two complementary approaches: using existing agents to enhance personal productivity and building custom agents to automate specific tasks. You'll learn how to use Amazon Q CLI for infrastructure tasks and how to create your own agents using Rapid Assistant SDK.
+
+## Workshop Structure
+
+This workshop is organized into two main sections:
+
+### Part 1: Personal Productivity with Agents (Modules 1-2)
+Learn how to use Amazon Q CLI as a personal assistant to accelerate your IT operations tasks. Transform a simple Pet Store microservice into a solution deployable on AWS EKS using AI assistance throughout the process.
+
+### Part 2: Building Custom Agents (Modules 3-4)
+Learn how to build your own agents using Rapid Assistant SDK and the Model Context Protocol (MCP). Create a Pet Store API agent and then develop custom agents for real-world use cases in your organization.
 
 ## Workshop Objectives
 
 By the end of this workshop, you will:
-- Understand how to leverage Amazon Q CLI for IT operations tasks
+- Understand how to leverage Amazon Q CLI for personal productivity in IT operations
+- Learn to craft effective prompts for infrastructure and deployment tasks
 - Transform a simple application to be deployable on Amazon EKS
-- Use Amazon Q CLI with AWS MCP Server to deploy solutions to AWS
+- Understand the Model Context Protocol (MCP) and how it extends LLM capabilities
+- Build a custom Pet Store agent using Rapid Assistant SDK and MCP
+- Design and implement agents for real-world use cases
 - Learn best practices for AI-assisted infrastructure management
 
 ## Prerequisites
@@ -17,11 +30,12 @@ By the end of this workshop, you will:
 - Amazon Q CLI installed
 - Docker installed
 - kubectl installed
+- Python 3.8+ installed
 - Basic understanding of containerization and Kubernetes
 
 ## Workshop Architecture
 
-This workshop uses a simple Pet Store microservice as the application to be deployed. The application is a RESTful API that allows users to manage pets in a store inventory.
+This workshop uses a simple Pet Store microservice as the application to be deployed and extended. The application is a RESTful API that allows users to manage pets in a store inventory.
 
 ### Application Components:
 - RESTful API built with Python (Flask)
@@ -33,6 +47,12 @@ This workshop uses a simple Pet Store microservice as the application to be depl
 - Application deployed as Kubernetes pods
 - Service and Ingress for external access
 - AWS RDS for production database (optional extension)
+
+### Agent Architecture:
+- Pet Store API wrapped as an MCP server
+- Custom tools exposed through the MCP protocol
+- Amazon Q CLI integration with the MCP server
+- Rapid Assistant SDK for agent development
 
 ## Design Documentation
 
@@ -62,20 +82,20 @@ These design documents are crucial for Amazon Q CLI to understand the applicatio
 - Develop Terraform code for EKS infrastructure
 - Review and refine the generated code
 
-### Module 3: Deploying to AWS with Q CLI + MCP Server
-- Understand AWS MCP (Model Context Provider) Server
-- Use Amazon Q CLI with MCP Server for enhanced AWS assistance
-- Validate and optimize infrastructure code
-- Deploy the application to AWS EKS
-- Verify and test the deployment
-- Set up monitoring and continuous deployment
+### Module 3: Building a Pet Store Agent with MCP and Rapid Assistant
+- Understand the Model Context Protocol (MCP) and how it extends LLM capabilities
+- Learn how to use Rapid Assistant SDK to build custom agents
+- Package the Pet Store API as an MCP server
+- Create custom tools that interact with the Pet Store API
+- Configure Amazon Q CLI to use your custom MCP server
+- Build complex workflows for pet store operations
+- Deploy your MCP server to AWS
 
-### Advanced Topics (Optional)
-- Implementing CI/CD pipelines
-- Adding monitoring and observability
-- Configuring auto-scaling
-- Setting up disaster recovery
-- Implementing security best practices
+### Module 4: Build Your Own Agent - Customer Use Case Challenge
+- Work in groups to identify a real-world use case from your organization
+- Design and implement a custom agent using MCP and Rapid Assistant SDK
+- Present your solution to the workshop (5 minutes per group)
+- Learn from other teams' approaches and implementations
 
 ## Using Amazon Q CLI for Transformation
 
@@ -101,22 +121,28 @@ Throughout this workshop, you'll use Amazon Q CLI to assist with various tasks. 
    q "Generate Terraform code to provision an EKS cluster that meets the requirements in design_docs/deployment_requirements.md"
    ```
 
-5. Deployment assistance:
+5. Building a Pet Store MCP agent:
    ```
-   q "Help me deploy the application to EKS using the Terraform code and Kubernetes manifests we've created"
+   q "Help me create an MCP server using Rapid Assistant SDK that exposes the Pet Store API operations as tools"
+   ```
+
+6. Interacting with the Pet Store agent:
+   ```
+   q "Show me all the pets in the store"
+   q "Add a new dog named Max that's 3 years old with a price of $500"
    ```
 
 ## Workshop Flow
 
-This workshop is designed to be hands-on, with participants using Amazon Q CLI to generate all deployment code themselves. Rather than providing pre-created deployment artifacts, the workshop guides you through the process of using AI assistance to create and refine these artifacts.
+This workshop is designed to be hands-on, with participants first using Amazon Q CLI to enhance their personal productivity, and then building their own agents to automate specific tasks. The Pet Store microservice serves as a consistent example throughout the workshop, first as an application to be deployed and then as an API to be wrapped as an agent.
 
-The Pet Store microservice code and design documentation serve as the starting point, and Amazon Q CLI helps you transform and deploy the application based on this foundation.
+In the first part (Modules 1-2), you'll learn how to use Amazon Q CLI to generate deployment code based on design documentation. In the second part (Modules 3-4), you'll learn how to build custom agents that can run assigned tasks using Rapid Assistant SDK and the Model Context Protocol.
 
 ## Getting Started
 
 1. Clone this repository
 2. Review the design documentation in the `design_docs` directory
-3. Follow the instructions in `docs/module1.md` to begin the workshop
+3. Follow the instructions in `workshop_modules/module1.md` to begin the workshop
 
 ## Resources
 
@@ -124,3 +150,4 @@ The Pet Store microservice code and design documentation serve as the starting p
 - [Amazon EKS Documentation](https://aws.amazon.com/eks/)
 - [AWS MCP Server Documentation](https://awslabs.github.io/mcp/)
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
+- [Rapid Assistant Documentation](https://docs.rapid-assistant.example.com)
