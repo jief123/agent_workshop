@@ -620,6 +620,9 @@ This script will:
      USER petstore
      ```
    - The order is important: copy files, set ownership, then switch user
+7. **Output defined in terraform outputs.tf may duplicated name with resource defined in main.tf**
+   - for example: An output named "eks_cluster_name" was already defined at main.tf:137,1-26. Output names must be unique within a module.
+   - Fix: Avoid duplicate output definitions in the Terraform configuration. The same output variables are defined in both main.tf and outputs.tf file.
 
 ## Conclusion
 
