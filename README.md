@@ -1,24 +1,25 @@
-# IT Ops Acceleration with Amazon Q CLI Workshop
+# IT Ops Acceleration with AI Agents Workshop
 
-This workshop demonstrates how to leverage AI agents for IT operations tasks through two complementary approaches: using existing agents to enhance personal productivity and building custom agents to automate specific tasks. You'll learn how to use Amazon Q CLI for infrastructure tasks and how to create your own agents using Rapid Assistant SDK.
+This workshop demonstrates how to leverage AI agents for IT operations tasks through two complementary approaches: first experiencing AI agents to understand their capabilities, then building custom agents to automate specific tasks. You'll learn what makes an effective AI agent (LLM loop + Tools + Knowledge) through hands-on experience with Amazon Q CLI, then apply this understanding to create your own agents using Rapid Assistant SDK.
 
 ## Workshop Structure
 
 This workshop is organized into two main sections:
 
-### Part 1: Personal Productivity with Agents (Modules 1-2)
-Learn how to use Amazon Q CLI as a personal assistant to accelerate your IT operations tasks. Transform a simple Pet Store microservice into a solution deployable on AWS EKS using AI assistance throughout the process.
+### Part 1: Understanding AI Agents Through Experience (Modules 1-2)
+Experience firsthand how AI agents work by using Amazon Q CLI as your personal assistant for IT operations tasks. Through the practical scenario of transforming a Pet Store microservice, you'll observe and interact with the core components of an effective agent: the LLM reasoning loop, tool usage, and knowledge application.
 
-### Part 2: Building Custom Agents (Modules 3-4)
-Learn how to build your own agents using Rapid Assistant SDK and the Model Context Protocol (MCP). Create a Pet Store API agent and then develop custom agents for real-world use cases in your organization.
+### Part 2: Building Custom AI Agents (Modules 3-4)
+Apply your understanding of agent architecture to build your own agents using Rapid Assistant SDK and the Model Context Protocol (MCP). Create a Pet Store API agent and then develop custom agents for real-world use cases in your organization.
 
 ## Workshop Objectives
 
 By the end of this workshop, you will:
-- Understand how to leverage Amazon Q CLI for personal productivity in IT operations
-- Learn to craft effective prompts for infrastructure and deployment tasks
-- Transform a simple application to be deployable on Amazon EKS
-- Understand the Model Context Protocol (MCP) and how it extends LLM capabilities
+- Understand the fundamental components of an AI agent: LLM loop + Tools + Knowledge
+- Experience how to effectively interact with AI agents through well-crafted prompts
+- Learn how agents make decisions about which tools to use and when
+- Observe how agents leverage contextual knowledge to solve complex problems
+- Understand the Model Context Protocol (MCP) and how it extends agent capabilities
 - Build a custom Pet Store agent using Rapid Assistant SDK and MCP
 - Design and implement agents for real-world use cases
 - Learn best practices for AI-assisted infrastructure management
@@ -74,16 +75,17 @@ These design documents are crucial for Amazon Q CLI to understand the applicatio
 - Test the API endpoints
 - Review the code structure and dependencies
 
-### Module 2: Transforming the Application for EKS
+### Module 2: Experiencing AI Agents in Action
 - Use Amazon Q CLI to analyze the design documents
 - Learn to craft effective prompts for infrastructure tasks
-- Generate a Dockerfile for containerization
-- Create Kubernetes manifests for deployment
-- Develop Terraform code for EKS infrastructure
-- Review and refine the generated code
+- Observe how the agent processes your prompts and makes decisions
+- Experience how the agent uses tools to accomplish tasks
+- See how the agent leverages knowledge from design documents and context
+- Generate infrastructure code for EKS deployment as a practical exercise
+- Understand the LLM reasoning loop in real-time problem solving
 
 ### Module 3: Building a Pet Store Agent with MCP and Prompt-Driven Development
-- Understand the Model Context Protocol (MCP) and how it extends LLM capabilities
+- Apply your understanding of agent architecture (LLM loop + Tools + Knowledge)
 - Learn how to use Rapid Assistant SDK to build custom agents
 - Apply prompt-driven development to design and implement agent tools
 - Package the Pet Store API as an MCP server
@@ -139,7 +141,7 @@ Throughout this workshop, you'll use Amazon Q CLI to assist with various tasks. 
 
 This workshop is designed to be hands-on, with participants first using Amazon Q CLI to enhance their personal productivity, and then building their own agents to automate specific tasks. The Pet Store microservice serves as a consistent example throughout the workshop, first as an application to be deployed and then as an API to be wrapped as an agent.
 
-In the first part (Modules 1-2), you'll learn how to use Amazon Q CLI to generate deployment code based on design documentation. In the second part (Modules 3-4), you'll learn how to build custom agents that can run assigned tasks using Rapid Assistant SDK and the Model Context Protocol.
+In the first part (Modules 1-2), you'll learn what makes an effective AI agent (LLM loop + Tools + Knowledge) through hands-on experience with Amazon Q CLI. In the second part (Modules 3-4), you'll learn how to build custom agents that can run assigned tasks using Rapid Assistant SDK and the Model Context Protocol.
 
 ## Getting Started
 
