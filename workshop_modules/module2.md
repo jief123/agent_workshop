@@ -77,37 +77,8 @@ q "Read DEPLOYMENT_README.md again, and Generate Terraform code for the EKS clus
 
 ## Part 2: Deploying to AWS
 
-### Step 5: Set Up AWS Cost Analysis MCP Server
 
-The AWS Cost Analysis MCP Server enhances Amazon Q's capabilities by providing cost optimization insights for your AWS deployments.
-
-1. Install the AWS Cost Analysis MCP Server:
-
-```bash
-q "How do I install and set up the AWS Cost Analysis MCP Server from https://awslabs.github.io/mcp/servers/cost-analysis-mcp-server/"
-```
-
-2. Analyze your Terraform project for cost optimization:
-
-```bash
-q "Using the Cost Analysis MCP Server's analyze_terraform_project tool, analyze the Terraform code in deployment/terraform to identify AWS services used and potential cost optimizations"
-```
-
-The `analyze_terraform_project` tool is defined with:
-```python
-@mcp.tool(
-    name='analyze_terraform_project',
-    description='Analyze a Terraform project to identify AWS services used. This tool dynamically extracts service information from Terraform resource declarations.'
-)
-```
-
-3. Review the cost analysis and implement recommended optimizations:
-
-```bash
-q "Based on the Cost Analysis MCP Server's output, what changes should I make to optimize costs in my EKS deployment?"
-```
-
-### Step 6: Generate Deployment and Testing Scripts
+### Step 5: Generate Deployment and Testing Scripts
 
 Create comprehensive deployment scripts based on the deployment process described in the documentation:
 
@@ -120,7 +91,7 @@ q "Create a deploy.sh script that follows the Deployment Process section in DEPL
 q "Create a cleanup.sh script that follows the Cleanup Process section in DEPLOYMENT_README.md"
 ```
 
-### Step 7: Deploy the Application
+### Step 6: Deploy the Application
 
 Deploy the application using the generated scripts:
 
@@ -131,7 +102,7 @@ q"run deployment/scripts/deploy.sh to deploy it"
 
 ## Part 3: Automated Testing
 
-### Step 8: Generate Automated Testing Scripts
+### Step 7: Generate Automated Testing Scripts
 
 Have Amazon Q automatically generate testing scripts based on the documentation:
 
@@ -159,7 +130,7 @@ cd deployment/tests
 
 After deploying and testing the application, you may notice data consistency issues between pods. This is because each pod uses its own SQLite database, leading to different data in each pod. Let's refactor the application to use Amazon RDS PostgreSQL for a shared database experience.
 
-### Step 9: Identify Data Consistency Issues
+### Step 8: Identify Data Consistency Issues
 
 Run the data consistency test to identify the problem:
 
@@ -170,7 +141,7 @@ cd deployment/tests
 
 This test will show that data created in one pod is not visible in other pods, indicating that each pod has its own isolated database.
 
-### Step 10: Create a Refactoring Plan
+### Step 9: Create a Refactoring Plan
 
 Create a comprehensive plan for migrating from SQLite to Amazon RDS:
 
@@ -184,7 +155,7 @@ Save this plan as a reference document:
 q "Save the migration plan to deployment/refactortords.md"
 ```
 
-### Step 11: Provision Amazon RDS PostgreSQL Instance
+### Step 10: Provision Amazon RDS PostgreSQL Instance
 
 Follow the plan to create the necessary AWS resources:
 
@@ -192,7 +163,7 @@ Follow the plan to create the necessary AWS resources:
 q "Help me execute Phase 1 of the refactortords.md plan to provision an Amazon RDS PostgreSQL instance"
 ```
 
-### Step 12: Update Kubernetes Configuration
+### Step 11: Update Kubernetes Configuration
 
 Update the Kubernetes secret to use the RDS connection string:
 
@@ -200,7 +171,7 @@ Update the Kubernetes secret to use the RDS connection string:
 q "Update the Kubernetes secret to use the RDS connection string as described in Phase 2 of refactortords.md"
 ```
 
-### Step 13: Migrate Data
+### Step 12: Migrate Data
 
 Create and run the data migration script:
 
@@ -208,7 +179,7 @@ Create and run the data migration script:
 q "Create and execute the data migration script as described in Phase 3 of refactortords.md"
 ```
 
-### Step 14: Update Deployment and Verify
+### Step 13: Update Deployment and Verify
 
 Update the deployment to use RDS and verify the changes:
 
@@ -216,7 +187,7 @@ Update the deployment to use RDS and verify the changes:
 q "Execute Phase 4 of refactortords.md to update the deployment and verify database connectivity"
 ```
 
-### Step 15: Set Up Monitoring and Maintenance
+### Step 14: Set Up Monitoring and Maintenance
 
 Configure monitoring and maintenance for the RDS instance:
 
@@ -224,7 +195,7 @@ Configure monitoring and maintenance for the RDS instance:
 q "Set up CloudWatch alarms and automated backups for the RDS instance as described in Phase 5 of refactortords.md"
 ```
 
-### Step 16: Verify Data Consistency
+### Step 15: Verify Data Consistency
 
 Run the data consistency test again to verify that the issue is resolved:
 

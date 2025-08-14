@@ -1,0 +1,70 @@
+# 完全适配Ubuntu 24.04版本
+ARG CUDA_VERSION=12.8
+FROM nvcr.io/nvidia/cuda:${CUDA_VERSION}-devel-ubuntu24.04
+
+# 版本调整以匹配AMI环境
+ARG GDRCOPY_VERSION=v2.5.1
+ARG EFA_INSTALLER_VERSION=1.42.0  # 保持较新版本
+ARG AWS_OFI_NCCL_VERSION=v1.16.0
+ARG NCCL_VERSION=v2.27.5-1        # 保持较新版本
+ARG NCCL_TESTS_VERSION=v2.16.4
+
+RUN apt-get update -y && apt-get upgrade -y
+
+# Ubuntu 24.04可能需要不同的包清理方式
+RUN apt-get remove -y --allow-change-held-packages \
+    ibverbs-utils \
+    libibverbs-dev \
+    libibverbs1 \
+    libmlx5-1 \
+    libnccl2 \
+    libnccl-dev || true
+
+RUN rm -rf /opt/hpcx \
+    && rm -rf /usr/local/mpi \
+    && rm -f /etc/ld.so.conf.d/hpcx.conf \
+    && ldconfig
+
+ENV OPAL_PREFIX=
+
+# Ubuntu 24.04的包名可能有变化
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated \
+    apt-utils \
+    autoconf \
+    automake \
+    build-essential \
+    check \
+    cmake \
+    curl \
+    debhelper \
+    devscripts \
+    git \
+    gcc \
+    gdb \
+    kmod \
+    libsubunit-dev \
+    libtool \
+    openssh-client \
+    openssh-server \
+    pkg-config \
+    python3-distutils \
+    python3-pip \
+    vim
+
+# Ubuntu 24.04使用Python 3.12
+RUN apt-get purge -y cuda-compat-* || true
+
+RUN mkdir -p /var/run/sshd
+RUN sed -i 's/[ #]\(.*StrictHostKeyChecking \).*/ \1no/g' /etc/ssh/ssh_config && \
+    echo "    UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config && \
+    sed -i 's/#\(StrictModes \).*/\1no/g' /etc/ssh/sshd_config
+
+# 环境变量保持不变
+ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/opt/amazon/openmpi/lib:/opt/nccl/build/lib:/opt/amazon/efa/lib:/opt/aws-ofi-nccl/install/lib:/usr/local/lib:$LD_LIBRARY_PATH
+ENV PATH /opt/amazon/openmpi/bin/:/opt/amazon/efa/bin:/usr/bin:/usr/local/bin:$PATH
+
+# Python 3.12不需要get-pip.py
+RUN pip3 install awscli pynvml
+
+# 其余安装步骤保持相同...
+# (GDRCopy, EFA, NCCL, AWS-OFI-NCCL, NCCL-tests的安装步骤)

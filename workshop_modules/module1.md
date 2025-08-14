@@ -275,6 +275,37 @@ For a visual understanding of the deployment architecture:
 q "Can you explain the deployment architecture diagram in design_docs/diagrams/deployment_arch.txt and how the components will be deployed on EKS?"
 ```
 
+### Step 8: Cost Analysis with MCP Server
+
+The AWS Cost Analysis MCP Server enhances Amazon Q's capabilities by providing cost optimization insights for your AWS deployments.
+
+1. Install the AWS Cost Analysis MCP Server:
+
+```bash
+q "How do I install and set up the AWS Cost Analysis MCP Server from https://awslabs.github.io/mcp/servers/cost-analysis-mcp-server/"
+```
+
+2. Analyze your Terraform project for cost optimization:
+
+```bash
+q "Using the Cost Analysis MCP Server's analyze_terraform_project tool, analyze the Terraform code in deployment/terraform to identify AWS services used and potential cost optimizations"
+```
+
+The `analyze_terraform_project` tool is defined with:
+```python
+@mcp.tool(
+    name='analyze_terraform_project',
+    description='Analyze a Terraform project to identify AWS services used. This tool dynamically extracts service information from Terraform resource declarations.'
+)
+```
+
+3. Review the cost analysis and implement recommended optimizations:
+
+```bash
+q "Based on the Cost Analysis MCP Server's output, what changes should I make to optimize costs in my EKS deployment?"
+```
+
+
 ## Conclusion
 
 In this module, you've used Amazon Q CLI to explore the Pet Store microservice application, understand its architecture, and test it locally. By leveraging AI assistance throughout the process, you've experienced how Amazon Q can accelerate understanding and working with unfamiliar applications.

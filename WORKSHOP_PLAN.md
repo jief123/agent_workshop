@@ -1,12 +1,13 @@
-# Workshop Plan: Accelerating IT Ops with Amazon Q CLI
+# Workshop Plan: Accelerating IT Ops with AI Agents
 
 ## Overview
-This workshop demonstrates how to use Amazon Q CLI and other AI agents to accelerate IT operations tasks. Participants will transform a simple Pet Store microservice into a solution deployable on AWS EKS, using AI assistance throughout the process.
+This workshop demonstrates how to leverage AI agents for IT operations tasks through two complementary approaches: first experiencing AI agents to understand their capabilities, then building custom agents to automate specific tasks. Participants will learn what makes an effective AI agent (LLM loop + Tools + Knowledge) through hands-on experience with Amazon Q CLI, then apply this understanding to create their own agents.
 
 ## Project Structure
 ```
 agent_workshop/
 ├── README.md                     # Main workshop instructions
+├── README_CN.md                  # Chinese version of workshop instructions
 ├── petstore-app/                 # Simple microservice source code
 │   ├── src/                      # Application source code
 │   │   ├── controllers/          # API controllers
@@ -30,10 +31,19 @@ agent_workshop/
 │   ├── terraform/                # For Terraform code
 │   ├── scripts/                  # For helper scripts
 │   └── workflows/                # For deployment workflows
-└── docs/                         # Workshop documentation
+├── reference_deployment/         # Reference implementation for participants who need help
+│   ├── docker/                   # Reference Dockerfile
+│   ├── kubernetes/               # Reference Kubernetes manifests
+│   ├── terraform/                # Reference Terraform code
+│   ├── scripts/                  # Reference helper scripts
+│   └── workflows/                # Reference deployment workflows
+└── workshop_modules/             # Workshop documentation
     ├── module1.md                # Module 1: Understanding the application
-    ├── module2.md                # Module 2: Transforming for EKS
-    ├── module3.md                # Module 3: Deploying with Q CLI + MCP
+    ├── module2.md                # Module 2: Experiencing AI Agents in Action
+    ├── module3.md                # Module 3: Building a Pet Store Agent with MCP
+    ├── module4.md                # Module 4: Build Your Own Agent
+    ├── facilitator_guide.md      # Guide for workshop facilitators
+    ├── facilitator_guide_CN.md   # Chinese version of facilitator guide
     └── advanced_topics.md        # Additional topics and extensions
 ```
 
@@ -78,17 +88,21 @@ agent_workshop/
   - Security requirements
   - Monitoring and logging needs
   - Backup and disaster recovery considerations
-
 ### Step 3: Prepare Workshop Documentation
 - Create step-by-step guides for each module
 - Include example Amazon Q CLI prompts for participants to use
 - Document expected outcomes and validation steps
 - Create troubleshooting guides for common issues
+- Design guided discovery activities for Module 2
+- Create reflection questions for the critical transition after Module 2
+- Develop tool templates for Module 3
 
-### Step 4: Create Empty Deployment Structure
+### Step 4: Create Empty Deployment Structure and Reference Implementation
 - Set up empty directories for deployment resources
 - Participants will use Amazon Q CLI to generate all deployment code themselves
-- No pre-created deployment artifacts should be provided
+- Create a reference implementation in the reference_deployment directory
+- The reference implementation should not be shared initially but available if participants get stuck
+- Include detailed comments in reference code explaining design decisions and best practices
 
 ## Workshop Flow
 
@@ -99,44 +113,39 @@ agent_workshop/
 - Exploration of code structure and dependencies
 - Understanding deployment requirements
 
-### Module 2: Transforming the Application for EKS
+### Module 2: Experiencing AI Agents in Action
 - Using Amazon Q CLI to analyze design documents
 - Learning to craft effective prompts for infrastructure tasks
-- Database refactoring:
-  - Refactoring the application to support PostgreSQL for production
-  - Creating database migration scripts
-  - Enhancing health checks for database connectivity
-- Containerization with Docker:
-  - Creating an optimized Dockerfile using Amazon Q CLI
-  - Building and testing the container locally
-- Kubernetes configuration:
-  - Creating deployment manifests using Amazon Q CLI
-  - Configuring services and ingress using Amazon Q CLI
-  - Setting up ConfigMaps and Secrets using Amazon Q CLI
-- Infrastructure as Code with Terraform:
-  - VPC and networking setup using Amazon Q CLI
-  - EKS cluster configuration using Amazon Q CLI
-  - RDS PostgreSQL instance setup using Amazon Q CLI
-  - Security and IAM configuration using Amazon Q CLI
-  - Resource optimization using Amazon Q CLI
+- Observing how the agent processes prompts and makes decisions
+- Experiencing how the agent uses tools to accomplish tasks
+- Seeing how the agent leverages knowledge from design documents
+- Generating infrastructure code for EKS deployment as a practical exercise
+- Documenting observations about agent behavior
+- Reflecting on the agent's problem-solving approach
 
-### Module 3: Building a Pet Store Agent with MCP and Rapid Assistant
+### Critical Transition: Reflecting on Agent Experiences
+- Group discussion about observations from Module 2
+- Identifying patterns in agent behavior
+- Introduction to the agent concept (LLM loop + Tools + Knowledge)
+- Connecting experiences to formal concepts
+- Preparing to build custom agents
+
+### Module 3: Building a Pet Store Agent with MCP and Prompt-Driven Development
 - Introduction to MCP (Model Context Protocol)
 - Overview of Rapid Assistant SDK
-- Setting up the development environment
+- Applying the agent architecture components learned
 - Creating a Pet Store API client
 - Defining MCP tools for Pet Store operations
 - Building the MCP server
 - Configuring Amazon Q CLI to use the custom MCP server
-- Advanced features and AWS service integration
-- Hands-on exercises
+- Hands-on exercises with prompt-driven development
 
 ### Module 4: Build Your Own Agent - Customer Use Case Challenge
 - Group formation (3-5 participants per group)
 - Use case identification and selection
-- Agent design (15 minutes)
-- Agent implementation (45 minutes)
-- Presentation preparation (10 minutes)
+- Agent design with explicit identification of LLM loop, tools, and knowledge components
+- Agent implementation
+- Presentation preparation
 - Group presentations (5 minutes per group + 2 minutes Q&A)
 - Evaluation and feedback
 
@@ -154,53 +163,54 @@ agent_workshop/
 q "Analyze the design documents in the design_docs directory and summarize the key requirements for containerization and deployment"
 ```
 
-### For Database Refactoring
+### For Infrastructure Code Generation
 ```
-q "Analyze the database connection code in the Pet Store application and refactor it to support both SQLite for development and PostgreSQL for production"
-```
-
-q "Create a Python script to migrate data from SQLite to PostgreSQL for the Pet Store application"
+q "Based on the application requirements in design_docs/deployment_requirements.md, create a Dockerfile for the Pet Store application"
 ```
 
-### For Dockerfile Creation
 ```
-q "Based on the application requirements in design_docs/deployment_requirements.md, create a Dockerfile for the Pet Store application that includes PostgreSQL support"
-```
-
-### For Kubernetes Manifest Generation
-```
-q "Create Kubernetes deployment and service manifests for the Pet Store application based on the architecture described in design_docs/architecture.md and the requirements in design_docs/deployment_requirements.md"
+q "Create Kubernetes deployment and service manifests for the Pet Store application based on the architecture described in design_docs/architecture.md"
 ```
 
-### For Terraform Development
 ```
-q "Generate Terraform code to provision an EKS cluster and RDS PostgreSQL instance that meets the requirements in design_docs/deployment_requirements.md"
+q "Generate Terraform code to provision an EKS cluster that meets the requirements in design_docs/deployment_requirements.md"
 ```
 
-### For MCP Agent Development
+### For Agent Development
+```
+q "Design a tool definition for listing pets in a store using the Rapid Assistant SDK"
+```
+
+```
+q "How can I improve the search_pets tool to handle case sensitivity and partial matches better?"
+```
+
 ```
 q "Help me create an MCP server using Rapid Assistant SDK that exposes the Pet Store API operations as tools"
 ```
 
-### For Custom Agent Use Cases
+### For Agent Interaction
 ```
-q "Design an MCP agent that could help with cloud cost optimization by analyzing AWS Cost Explorer data"
-```
-
-q "Create a tool definition for an MCP agent that can check the health of microservices"
+q "Show me all the pets in the store"
 ```
 
+```
+q "Add a new dog named Max that's 3 years old with a price of $500"
+```
+
+## Preparation Checklist
 - Test the Pet Store application to ensure it runs locally
 - Validate that the design documentation provides sufficient context for Amazon Q CLI
 - Test example Amazon Q CLI prompts to ensure they produce expected results
 - Create checkpoints throughout the workshop for participants to validate their progress
+- Prepare guided discovery questions for Module 2
+- Create reflection prompts for the critical transition
+- Test the MCP server implementation
 
 ## Workshop Extensions
-
 - Multi-region deployment
 - Blue-green deployment strategies
-- Integration with AWS services like RDS, ElastiCache, etc.
-- Implementing API Gateway and Lambda for serverless components
+- Integration with additional AWS services
 - Setting up monitoring with CloudWatch and Prometheus
 - Implementing automated backup and recovery procedures
 - Building specialized agents for different business domains

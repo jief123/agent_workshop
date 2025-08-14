@@ -206,7 +206,7 @@ agent_workshop/
    - CORS_ORIGINS
 
 6. **Secret (db-credentials)**:
-   - DATABASE_URL
+   - DATABASE_URL: `sqlite:///petstore.db` (relative path to avoid container permission issues)
 
 ### Docker Configuration
 
@@ -390,7 +390,7 @@ The AWS Load Balancer Controller requires special attention for proper setup:
 
 | Variable | Description | Source |
 |----------|-------------|--------|
-| DATABASE_URL | Database connection string | Secret |
+| DATABASE_URL | SQLite database connection string (use relative path to avoid permission issues) | Secret |
 | API_VERSION | API version | ConfigMap |
 | ENVIRONMENT | Deployment environment | ConfigMap |
 | LOG_LEVEL | Logging level | ConfigMap |
@@ -575,11 +575,93 @@ This script will:
 
 ### Common Issues
 
-1. **EKS API Endpoint Not Accessible**:
+1. **EKS Node Group Creation Failure with User Data Format Error**:
+   - Error: `waiting for EKS Node Group create: unexpected state 'CREATE_FAILED', last error: Ec2LaunchTemplateInvalidConfiguration: User data was not in the MIME multipart format`
+   - Root Cause: EKS Terraform module generates user data in incorrect format when `enable_bootstrap_user_data = true`
+   - Fix: Set `enable_bootstrap_user_data = false` in your EKS node group configuration:
+     ```hcl
+     eks_managed_node_groups = {
+       petstore_nodes = {
+         # Other configurations...
+         enable_bootstrap_user_data = false  # Key fix
+         ami_type = "AL2_x86_64"
+       }
+     }
+     ```
+   - If this error occurs during deployment, remove the failed node group from state and reapply:
+     ```bash
+     terraform state rm 'module.eks.module.eks_managed_node_group["petstore_nodes"].aws_eks_node_group.this[0]'
+     terraform apply
+     ```
+
+2. **Terraform OIDC Provider Data Source Not Found**:
+   - Error: `finding IAM OIDC Provider by url (https://oidc.eks.us-east-1.amazonaws.com/id/xxx): not found`
+   - Root Cause: Terraform data source attempts to read OIDC Provider before it's fully created and propagated
+   - Fix: Add explicit dependency in your Terraform configuration:
+     ```hcl
+     data "aws_iam_openid_connect_provider" "eks" {
+       url = module.eks.cluster_oidc_issuer_url
+       depends_on = [module.eks]  # Key fix: Add dependency
+     }
+     ```
+
+3. **kubectl Authentication Failure with EKS Access Control**:
+   - Error: `You must be logged in to the server (the server has asked for the client to provide credentials)`
+   - Root Cause: EKS clusters created after 2024 use `API_AND_CONFIG_MAP` authentication mode by default, requiring explicit access entries
+   - Fix: Create access entry and associate admin policy:
+     ```bash
+     # Get current user ARN
+     current_user_arn=$(aws sts get-caller-identity --query 'Arn' --output text)
+     
+     # Create access entry
+     aws eks create-access-entry \
+         --cluster-name petstore-eks \
+         --region us-east-1 \
+         --principal-arn "$current_user_arn" \
+         --type STANDARD \
+         --username workshopadmin
+     
+     # Associate cluster admin policy
+     aws eks associate-access-policy \
+         --cluster-name petstore-eks \
+         --region us-east-1 \
+         --principal-arn "$current_user_arn" \
+         --policy-arn arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy \
+         --access-scope type=cluster
+     
+     # Wait for permission propagation
+     sleep 10
+     
+     # Reconfigure kubectl
+     aws eks update-kubeconfig --region us-east-1 --name petstore-eks
+     ```
+   - Alternative: Pre-configure access entries in Terraform:
+     ```hcl
+     resource "aws_eks_access_entry" "admin_user" {
+       cluster_name      = module.eks.cluster_name
+       principal_arn     = data.aws_caller_identity.current.arn
+       type              = "STANDARD"
+       username          = "admin"
+     }
+     
+     resource "aws_eks_access_policy_association" "admin_policy" {
+       cluster_name  = module.eks.cluster_name
+       principal_arn = data.aws_caller_identity.current.arn
+       policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+       
+       access_scope {
+         type = "cluster"
+       }
+       
+       depends_on = [aws_eks_access_entry.admin_user]
+     }
+     ```
+
+4. **EKS API Endpoint Not Accessible**:
    - Ensure `cluster_endpoint_public_access = true` is set in Terraform
    - Check security group rules to allow access to the EKS API endpoint
 
-2. **AWS Load Balancer Controller Not Working**:
+5. **AWS Load Balancer Controller Not Working**:
    - Verify the service account has the correct IAM role annotation
    - Check that the IngressClass resource is created before the controller
    - Set `createIngressClassResource: false` in Helm values to avoid conflicts
@@ -620,7 +702,17 @@ This script will:
      USER petstore
      ```
    - The order is important: copy files, set ownership, then switch user
-7. **Output defined in terraform outputs.tf may duplicated name with resource defined in main.tf**
+
+7. **SQLite Database Path Configuration**:
+   - Using absolute path `sqlite:///app/petstore.db` may cause permission issues in containers
+   - Recommended: Use relative path `sqlite:///petstore.db` to let SQLite create database in working directory
+   - Ensure the container's working directory (/app) has write permissions for the running user
+   - Fix: Update the DATABASE_URL in Kubernetes secret:
+     ```bash
+     kubectl patch secret db-credentials -n petstore -p '{"data":{"DATABASE_URL":"'$(echo -n "sqlite:///petstore.db" | base64)'"}}'
+     ```
+
+8. **Output defined in terraform outputs.tf may duplicated name with resource defined in main.tf**
    - for example: An output named "eks_cluster_name" was already defined at main.tf:137,1-26. Output names must be unique within a module.
    - Fix: Avoid duplicate output definitions in the Terraform configuration. The same output variables are defined in both main.tf and outputs.tf file.
 

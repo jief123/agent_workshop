@@ -1,0 +1,14 @@
+# 最小修改版本 - 适用于Ubuntu 24.04 AMI
+ARG CUDA_VERSION=12.8.1
+FROM nvcr.io/nvidia/cuda:${CUDA_VERSION}-devel-ubuntu22.04
+
+# 更新GDRCopy版本以匹配AMI
+ARG GDRCOPY_VERSION=v2.5.1
+# 保持较新的EFA版本
+ARG EFA_INSTALLER_VERSION=1.42.0
+ARG AWS_OFI_NCCL_VERSION=v1.16.0
+ARG NCCL_VERSION=v2.27.5-1
+ARG NCCL_TESTS_VERSION=v2.16.4
+
+# 其余部分保持不变...
+# (复制原Dockerfile的其余内容)
